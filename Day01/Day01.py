@@ -22,7 +22,7 @@ def part1inner(line, result):
 
 
 # conversion from letters to numbers
-# trick: keep start and end letters if they can ends ot start other numbers
+# trick: keep start and end letters if they can end or start other number names
 convert_dict = {
     "zero": "_0o",   # => X / One
     "one": "o1e",    # => zerO / Eight
