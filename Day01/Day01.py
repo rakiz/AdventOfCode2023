@@ -14,7 +14,7 @@ def process_file(filename, func):
 
 def part1inner(line, result):
     # search for digits
-    findings = re.findall("\d", line)
+    findings = re.findall("\\d", line)
     # assemble the first and the last ones and convert them to integer
     number = int(findings[0] + findings[-1])
     # sum everything together
@@ -22,7 +22,7 @@ def part1inner(line, result):
 
 
 # conversion from letters to numbers
-# trick: keep start and end letters if they can ends ot start other numbers
+# trick: keep start and end letters if they can end or start other number names
 convert_dict = {
     "zero": "_0o",   # => X / One
     "one": "o1e",    # => zerO / Eight
