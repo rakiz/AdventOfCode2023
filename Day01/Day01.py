@@ -1,6 +1,8 @@
 import re
 
-FILENAME = "input.txt"
+INPUT_FILE = "input.txt"
+TEST1_FILE = "test1.txt"
+TEST2_FILE = "test2.txt"
 
 
 def process_file(filename, func):
@@ -12,7 +14,7 @@ def process_file(filename, func):
         return result
 
 
-def part1inner(line, result):
+def part1(line, result):
     # search for digits
     findings = re.findall("\\d", line)
     # assemble the first and the last ones and convert them to integer
@@ -22,28 +24,32 @@ def part1inner(line, result):
 
 
 # conversion from letters to numbers
-# trick: keep start and end letters if they can end or start other number names
+# trick: keep first letter if any of the following ends with it
+#        same for last letter
 convert_dict = {
-    "zero": "_0o",   # => X / One
-    "one": "o1e",    # => zerO / Eight
-    "two": "t2o",    # => eighT / One
-    "three": "t3_",  # => eighT / Eight
-    "four": "_4_",   # => X / X
-    "five": "_5e",   # => X / Eight
-    "six": "_6_",    # => X / X
-    "seven": "_7_",  # => X / X
-    "eight": "e8t",  # => onE, threE / Two, Three
-    "nine": "_9e",   # => X / Eight
+    "zero": "0o",
+    "one": "o1e",
+    "two": "t2",
+    "three": "t3e",
+    "four": "4",
+    "five": "5e",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
 }
 
 
-def part2inner(line, result):
+def part2(line, result):
     # convert words into digits
     for k, v in convert_dict.items():
         line = line.replace(k, v)
-    return part1inner(line, result)
+    return part1(line, result)
 
 
 if __name__ == '__main__':
-    print('part 1 sum : {0}'.format(process_file(FILENAME, part1inner)))  # expect 55029
-    print('part 2 sum : {0}'.format(process_file(FILENAME, part2inner)))  # expect 55686
+    assert (process_file(TEST1_FILE, part1) == 142)
+    print('Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))
+
+    assert (process_file(TEST2_FILE, part2) == 281)
+    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # expect 55686
