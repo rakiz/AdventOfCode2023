@@ -8,7 +8,7 @@ TEST2_FILE = "test2.txt"
 def process_file(filename, func):
     with open(filename, 'r', encoding='UTF-8') as file:
         result = 0
-        # read the input file, line by line
+        # read the input file, line by line, and call the func
         while line := file.readline().rstrip():
             result = func(line, result)
         return result
@@ -24,8 +24,7 @@ def part1(line, result):
 
 
 # conversion from letters to numbers
-# trick: keep first letter if any of the following ends with it
-#        same for last letter
+# trick: keep first letter if any of the following ends with it, same with the last letter if following starts with it
 convert_dict = {
     "zero": "0o",
     "one": "o1e",
@@ -35,7 +34,7 @@ convert_dict = {
     "five": "5e",
     "six": "6",
     "seven": "7",
-    "eight": "8",
+    "eight": "e8",
     "nine": "9",
 }
 
@@ -52,4 +51,4 @@ if __name__ == '__main__':
     print('Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))
 
     assert (process_file(TEST2_FILE, part2) == 281)
-    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # expect 55686
+    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))

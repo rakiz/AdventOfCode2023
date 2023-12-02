@@ -8,7 +8,7 @@ TEST_FILE = "test.txt"
 def process_file(filename, func):
     with open(filename, 'r', encoding='UTF-8') as file:
         result = 0
-        # read the input file, line by line
+        # read the input file, line by line and call the func
         while line := file.readline().rstrip():
             result = func(line, result)
 
@@ -19,28 +19,30 @@ bag = {"red": 12, "green": 13, "blue": 14}
 
 
 def part1(line, result):
-    game_split = line.split(":")
-    game_num = int(game_split[0].split()[1])
+    game_id, game_draws = line.split(":")
+    _, game_num = game_id.split()
 
-    possible = True
-    for draws in game_split[1].split(";"):
+    for draws in game_draws.split(";"):
         cube_draws = draws.split(',')
         for cube in cube_draws:
-            draw = cube.split()
-            possible = possible and int(draw[0]) <= bag[draw[1]]
+            number, color = cube.split()
+            # Hey! Wait! For this color, we've drawn more cubes than there are in the bag! No need to continue.
+            if int(number) > bag[color]:
+                return result
 
-    return result + game_num if possible else result
+    return result + int(game_num)
 
 
 def part2(line, result):
     # initialize with 0 all cube colors
     min_cubes = {"red": 0, "green": 0, "blue": 0}
-    game_split = line.split(":")
-    for draws in game_split[1].split(";"):
+    _, game_draws = line.split(":")
+
+    for draws in game_draws.split(";"):
         cube_draws = draws.split(',')
         for cube in cube_draws:
-            draw = cube.split()
-            min_cubes[draw[1]] = max(min_cubes[draw[1]], int(draw[0]))
+            number, color = cube.split()
+            min_cubes[color] = max(min_cubes[color], int(number))
 
     return result + reduce(operator.mul, min_cubes.values(), 1)
 
