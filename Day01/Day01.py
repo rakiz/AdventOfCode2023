@@ -16,7 +16,7 @@ def process_file(filename, func):
 
 def part1(line, result):
     # search for digits
-    findings = re.findall("\\d", line)
+    findings = re.findall(r"\d", line)
     # assemble the first and the last ones and convert them to integer
     number = int(findings[0] + findings[-1])
     # sum everything together
@@ -33,7 +33,7 @@ convert_dict = {
     "four": "4",
     "five": "5e",
     "six": "6",
-    "seven": "7",
+    "seven": "7n",
     "eight": "e8",
     "nine": "9",
 }
