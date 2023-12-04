@@ -1,3 +1,4 @@
+from collections import defaultdict
 import re
 
 INPUT_FILE = "input.txt"
@@ -16,29 +17,21 @@ def process_file(filename, func):
 
 def part1(line, result):
     _, winnings, draw = re.split(r"[:|]", line)
-    win_numbers = winnings.split()
-
-    w = sum(draw_number in win_numbers for draw_number in draw.split())
+    w = len(set(winnings.split()) & set(draw.split()))
     return result + 2 ** (w - 1) if w > 0 else result
 
 
-winning_cards = {}
+winning_cards = defaultdict(int)
 
 
 def part2(line, result):
-    game_id, numbers = line.split(":")
-    _, game_number = game_id.split()
+    game, winnings, draw = re.split(r"[:|]", line)
+    _, game_number = game.split()
     game_number = int(game_number)
 
-    n = winning_cards.get(game_number, 0) + 1
-    winning_cards[game_number] = n
-
-    winnings, draw = numbers.split("|")
-    w = sum(draw_number in winnings.split() for draw_number in draw.split())
-
-    if w > 0:
-        for i in range(w):
-            winning_cards[(game_number + i + 1)] = winning_cards.get(game_number + i + 1, 0) + n
+    winning_cards[game_number] = winning_cards.setdefault(game_number, 0) + 1
+    for i in range(len(set(winnings.split()) & set(draw.split()))):
+        winning_cards[(game_number + i + 1)] += winning_cards[game_number]
 
     return result + winning_cards[game_number]
 
