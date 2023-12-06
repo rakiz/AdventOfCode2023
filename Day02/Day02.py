@@ -48,8 +48,8 @@ def part2(line, result):
 
 
 if __name__ == '__main__':
-    assert (process_file(TEST_FILE, part1) == 8)
-    print('Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))
+    assert process_file(TEST_FILE, part1) == 8
+    print('Day 02 - Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 1734
 
-    assert (process_file(TEST_FILE, part2) == 2286)
-    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))
+    assert process_file(TEST_FILE, part2) == 2286
+    print('Day 02 - Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 70387

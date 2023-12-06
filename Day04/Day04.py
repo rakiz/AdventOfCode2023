@@ -37,9 +37,9 @@ def part2(line, result):
 
 
 if __name__ == '__main__':
-    assert (process_file(TEST_FILE, part1) == 13)
-    print('Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 21959
+    assert process_file(TEST_FILE, part1) == 13
+    print('Day 04 - Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 21959
 
-    assert (process_file(TEST_FILE, part2) == 30)
+    assert process_file(TEST_FILE, part2) == 30
     winning_cards.clear()  # DO NOT FORGET TO CLEAN UP YOUR PLATE!
-    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 5132675
+    print('Day 04 - Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 5132675

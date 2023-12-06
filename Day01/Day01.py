@@ -47,8 +47,8 @@ def part2(line, result):
 
 
 if __name__ == '__main__':
-    assert (process_file(TEST1_FILE, part1) == 142)
-    print('Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))
+    assert process_file(TEST1_FILE, part1) == 142
+    print('Day 01 - Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 55029
 
-    assert (process_file(TEST2_FILE, part2) == 281)
-    print('Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))
+    assert process_file(TEST2_FILE, part2) == 281
+    print('Day 01 - Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 55686

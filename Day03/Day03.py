@@ -48,8 +48,8 @@ def part2(filename):
 
 
 if __name__ == '__main__':
-    assert (part1(TEST_FILE) == 4361)
-    print('Part 1 answer : {0}'.format(part1(INPUT_FILE)))
+    assert part1(TEST_FILE) == 4361
+    print('Day 03 - Part 1 answer : {0}'.format(part1(INPUT_FILE)))  # 539433
 
-    assert (part2(TEST_FILE) == 467835)
-    print('Part 2 answer : {0}'.format(part2(INPUT_FILE)))
+    assert part2(TEST_FILE) == 467835
+    print('Day 03 - Part 2 answer : {0}'.format(part2(INPUT_FILE)))  # 75847567
