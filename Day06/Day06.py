@@ -3,7 +3,6 @@ import time
 
 INPUT_FILE = "input.txt"
 TEST_FILE = "test.txt"
-epsilon = 0.00000001
 
 
 # returns [(time,distance to beat),...]
@@ -40,8 +39,8 @@ def execute(races):
         racine_delta = math.sqrt(b * b - 4 * a * c)
         # solutions: (-race_time +/- √D) / 2         (-b +/- √D) / 2a
         # trick: add epsilon value and ceil min solution; sub epsilon value and floor max solution
-        solution1 = math.ceil(((-b - racine_delta) / 2) + epsilon)
-        solution2 = math.floor(((-b + racine_delta) / 2) - epsilon)
+        solution1 = math.floor(((-b - racine_delta) / 2)) + 1
+        solution2 = math.ceil(((-b + racine_delta) / 2)) - 1
         # multiplying with the number of ways to beat it
         result *= solution2 - solution1 + 1
 
