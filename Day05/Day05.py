@@ -50,7 +50,7 @@ def part1(seeds, mappings):
             start = find_mapping(int(start), mapping)
         result = min(start, result)
     t1 = time.time_ns()
-    print("Part 1 End ({}ms)- result = {}\n".format((t1 - t0)/1000, result))
+    print("Part 1 End ({}µs)- result = {}\n".format((t1 - t0)/1000, result))
     return result
 
 
@@ -90,7 +90,7 @@ def part2(seeds_tuple, mappings):
             else:
                 result = min(seed, result)
     t1 = time.time_ns()
-    print("Part 2 End ({}ms)- result = {}".format((t1 - t0)/1000, result))
+    print("Part 2 End ({}µs)- result = {}".format((t1 - t0)/1000, result))
     return result
 
 

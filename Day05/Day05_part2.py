@@ -92,7 +92,7 @@ def process_file_part2(filename):
         # final result is the minimal low range of mapped seeds
         result = min([seed[0] for seed in seeds])
         t1 = time.time_ns()
-        print("Part 2 End ({}ms)- result = {}".format((t1 - t0) / 1000, result))
+        print("Part 2 End ({}µs)- result = {}".format((t1 - t0) / 1000, result))
         return result
 
 
