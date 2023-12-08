@@ -27,8 +27,8 @@ def get_data(filename, is_part1):
 
 
 def execute(races):
-    print("Start - races: {}".format(races))
-    t0 = time.time_ns()
+    print(f"Day 05 - Start - races: {races}")
+    t0 = time.perf_counter()
     result = 1  # not 0, we're multiplying here !
     for race_time, distance in races:
         # x is the race_time we press the button
@@ -44,15 +44,14 @@ def execute(races):
         # multiplying with the number of ways to beat it
         result *= solution2 - solution1 + 1
 
-    t1 = time.time_ns()
-    print("End ({}ns)- result = {}\n".format((t1 - t0), result))
-
+    t1 = time.perf_counter()
+    print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
     return result
 
 
 if __name__ == '__main__':
     assert execute(get_data(TEST_FILE, True)) == 288
-    execute(get_data(INPUT_FILE, True))  # 114400
+    assert execute(get_data(INPUT_FILE, True)) == 114400
 
     assert execute(get_data(TEST_FILE, False)) == 71503
-    execute(get_data(INPUT_FILE, False))  # 21039729
+    assert execute(get_data(INPUT_FILE, False)) == 21039729

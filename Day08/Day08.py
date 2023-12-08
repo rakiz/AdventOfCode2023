@@ -21,7 +21,7 @@ def load_file(filename):
 
 def apply(pattern, routes, is_part2):
     print(f"Day 08 (part2={is_part2}) - Start")
-    t0 = time.time_ns()
+    t0 = time.perf_counter()
 
     starts = [k for k in routes.keys() if k[-1] == "A"] if is_part2 else ["AAA"]
     print(f"starts:{starts}")
@@ -35,8 +35,8 @@ def apply(pattern, routes, is_part2):
 
     result = reduce(lcm, counts)  # And now, just let find the Least Common Multiple
 
-    t1 = time.time_ns()
-    print("End ({}ms) - result = {}\n".format((t1 - t0) / 1000000, result))
+    t1 = time.perf_counter()
+    print(f"End ({(t1 - t0) * 1_000:.2f}ms) - result = {result}\n")
     return result
 
 

@@ -1,17 +1,23 @@
-from collections import defaultdict
 import re
+import time
+from collections import defaultdict
 
 INPUT_FILE = "input.txt"
 TEST_FILE = "test.txt"
 
 
 def process_file(filename, func):
+    print("Day 04 - Start")
+    t0 = time.perf_counter()
+
     with open(filename, 'r', encoding='UTF-8') as file:
         result = 0
         # read the input file, line by line and call the func
         while line := file.readline().rstrip():
             result = func(line, result)
 
+        t1 = time.perf_counter()
+        print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
         return result
 
 
@@ -38,8 +44,8 @@ def part2(line, result):
 
 if __name__ == '__main__':
     assert process_file(TEST_FILE, part1) == 13
-    print('Day 04 - Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 21959
+    assert process_file(INPUT_FILE, part1) == 21959
 
     assert process_file(TEST_FILE, part2) == 30
     winning_cards.clear()  # DO NOT FORGET TO CLEAN UP YOUR PLATE!
-    print('Day 04 - Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 5132675
+    assert process_file(INPUT_FILE, part2) == 5132675

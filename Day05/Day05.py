@@ -42,15 +42,15 @@ def find_mapping(seed, mapping):
 
 
 def part1(seeds, mappings):
-    print("Day 05 - Part1 Start - seeds: {}".format(seeds))
-    t0 = time.time_ns()
+    print(f"Day 05 - Part1 Start - seeds: {seeds}")
+    t0 = time.perf_counter()
     result = sys.maxsize
     for start in seeds:
         for mapping in mappings:
             start = find_mapping(int(start), mapping)
         result = min(start, result)
-    t1 = time.time_ns()
-    print("Part 1 End ({}µs)- result = {}\n".format((t1 - t0)/1000, result))
+    t1 = time.perf_counter()
+    print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
     return result
 
 
@@ -74,8 +74,8 @@ def merge_seeds(seeds):
 
 
 def part2(seeds_tuple, mappings):
-    print("Day 05 - Part2 Start - seeds: {}".format(seeds_tuple))
-    t0 = time.time_ns()
+    print(f"Day 05 - Part2 Start - seeds: {seeds_tuple}")
+    t0 = time.perf_counter()
     min_location = sys.maxsize
     for mapping in mappings[-1].values():
         min_location = min(min_location, mapping[0])
@@ -89,8 +89,8 @@ def part2(seeds_tuple, mappings):
                 return seed
             else:
                 result = min(seed, result)
-    t1 = time.time_ns()
-    print("Part 2 End ({}µs)- result = {}".format((t1 - t0)/1000, result))
+    t1 = time.perf_counter()
+    print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
     return result
 
 
@@ -99,7 +99,8 @@ if __name__ == '__main__':
     input_seeds, input_seeds_tuple, input_mapping = load_file(INPUT_FILE)
 
     assert part1(test_seeds, test_mapping) == 35
-    part1(input_seeds, input_mapping)  # 214922730
+    assert part1(input_seeds, input_mapping) == 214922730
 
     assert part2(test_seeds_tuple, test_mapping) == 46
-    part2(input_seeds_tuple, input_mapping)  # 148041808
+    # The following one will take 8hours+ !
+    assert part2(input_seeds_tuple, input_mapping) == 148041808

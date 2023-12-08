@@ -50,8 +50,8 @@ def apply_mapping(current_mapping, seeds):
 
 
 def process_file_part2(filename):
-    print("Day 05 - Part2 Start")
-    t0 = time.time_ns()
+    print("Day 05 (optim) - Part2 Start")
+    t0 = time.perf_counter()
     seeds = []
     current_mapping = []
     with (open(filename, 'r', encoding='UTF-8') as file):
@@ -91,11 +91,12 @@ def process_file_part2(filename):
         seeds = apply_mapping(current_mapping, seeds)
         # final result is the minimal low range of mapped seeds
         result = min([seed[0] for seed in seeds])
-        t1 = time.time_ns()
-        print("Part 2 End ({}µs)- result = {}".format((t1 - t0) / 1000, result))
+
+        t1 = time.perf_counter()
+        print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
         return result
 
 
 if __name__ == '__main__':
     assert process_file_part2(TEST_FILE) == 46
-    process_file_part2(INPUT_FILE)  # 148041808
+    assert process_file_part2(INPUT_FILE) == 148041808

@@ -30,8 +30,8 @@ def hands_sort_part2(hands):
 
 def execute(filename, is_part2):
     hands = load_file(filename)
-    print(f"Day 07 - Part1 Start ({filename})")
-    t0 = time.time_ns()
+    print(f"Day 07 - (part2={is_part2}) - {filename}")
+    t0 = time.perf_counter()
 
     hands_per_type = {}
     for hand in hands:
@@ -63,8 +63,8 @@ def execute(filename, is_part2):
             result += i * hand[1]
             i += 1
 
-    t1 = time.time_ns()
-    print("End ({}ms)- result = {}\n".format((t1 - t0) / 1000000, result))
+    t1 = time.perf_counter()
+    print(f"End ({(t1 - t0) * 1_000:.2f}ms) - result = {result}\n")
     return result
 
 

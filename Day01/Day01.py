@@ -1,4 +1,5 @@
 import re
+import time
 
 INPUT_FILE = "input.txt"
 TEST1_FILE = "test1.txt"
@@ -6,11 +7,16 @@ TEST2_FILE = "test2.txt"
 
 
 def process_file(filename, func):
+    print("Day 01 - Start")
+    t0 = time.perf_counter()
     with open(filename, 'r', encoding='UTF-8') as file:
         result = 0
         # read the input file, line by line, and call the func
         while line := file.readline().rstrip():
             result = func(line, result)
+
+        t1 = time.perf_counter()
+        print(f"End ({(t1 - t0) * 1_000:.2f}ms) - result = {result}\n")
         return result
 
 
@@ -48,7 +54,7 @@ def part2(line, result):
 
 if __name__ == '__main__':
     assert process_file(TEST1_FILE, part1) == 142
-    print('Day 01 - Part 1 answer : {0}'.format(process_file(INPUT_FILE, part1)))  # 55029
+    assert process_file(INPUT_FILE, part1) == 55029
 
     assert process_file(TEST2_FILE, part2) == 281
-    print('Day 01 - Part 2 answer : {0}'.format(process_file(INPUT_FILE, part2)))  # 55686
+    assert process_file(INPUT_FILE, part2) == 55686
