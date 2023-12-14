@@ -25,7 +25,7 @@ def part1(sensors, result):
     while len(sensors) > 1:
         # keep the last value of the list (we'll need to add it to the diff to extrapolate)
         stack.append(sensors[-1])
-        # calculate the diff between each values of the array, and make it the next aray to use
+        # calculate the diff between each values of the array, and make them the next array to use
         sensors = [sensors[i + 1] - sensors[i] for i in range(len(sensors) - 1)]
 
     # now, we have a stack with the last value of each lines of diff, just sum them up
