@@ -9,8 +9,12 @@ def preprocess_file(filename):
     with open(filename, 'r', encoding='UTF-8') as file:
         lines = [line.rstrip() for line in file.readlines()]
 
-        numbers = [[match for match in re.finditer(r'\d+', line)] for line in lines]
-        symbols = [[match for match in re.finditer(r'[^0-9.]', line)] for line in lines]
+        numbers = [
+            [{"s": match.start(), "e": match.end(), "v": match.group()} for match in re.finditer(r'\d+', line)]
+            for line in lines]
+        symbols = [
+            [{"s": match.start(), "e": match.end(), "v": match.group()} for match in re.finditer(r'[^\d.]', line)]
+            for line in lines]
 
     return numbers, symbols
 
@@ -21,9 +25,9 @@ def get_adjacent(multiples, unique, i):
     multiples_end = min(i + 1, len(multiples))
     for line in multiples[multiples_start:multiples_end + 1]:
         for item in line:
-            if ((unique.start() <= item.end() and unique.end() >= item.start())
-                    or (item.start() <= unique.end() and item.end() >= unique.start())):
-                result.append(item.group())
+            if ((unique['s'] <= item['e'] and unique['e'] >= item['s'])
+                    or (item['s'] <= unique['e'] and item['e'] >= unique['s'])):
+                result.append(item['v'])
     return result
 
 
@@ -36,7 +40,7 @@ def part1(filename):
     for i, number_line in enumerate(numbers):
         for number in number_line:
             if len(get_adjacent(symbols, number, i)) > 0:
-                result += int(number.group())
+                result += int(number['v'])
 
     t1 = time.perf_counter()
     print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
@@ -51,9 +55,10 @@ def part2(filename):
     result = 0
     for i, symbol_line in enumerate(symbols):
         for symbol in symbol_line:
-            adjacent_numbers = get_adjacent(numbers, symbol, i)
-            if symbol.group() == "*" and len(adjacent_numbers) == 2:
-                result += int(adjacent_numbers[0]) * int(adjacent_numbers[1])
+            if symbol['v'] == "*":
+                adjacent_numbers = get_adjacent(numbers, symbol, i)
+                if len(adjacent_numbers) == 2:
+                    result += int(adjacent_numbers[0]) * int(adjacent_numbers[1])
 
     t1 = time.perf_counter()
     print(f"End ({(t1 - t0) * 1_000_000:.2f}µs) - result = {result}\n")
